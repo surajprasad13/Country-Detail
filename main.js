@@ -5,8 +5,9 @@ fetch("https://restcountries-v1.p.rapidapi.com/all", {
     "x-rapidapi-key": "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
   },
 })
-  .then((response) => {
-    console.log(response);
+  .then((response) =>response.json())
+  .then((data)=>{
+      console.log(data);
   })
   .catch((err) => {
     console.log(err);
