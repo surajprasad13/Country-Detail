@@ -1,5 +1,21 @@
-*{
-    margin:0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+ol {
+    padding-inline-start: 0%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    background-color: aqua;
+}
+
+li {
+
+    text-align: center;
+    list-style: none;
+    padding: 50px;
+    width: auto;
+    border: 2px solid red;
 }
