@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Karma&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Karma',
+        serif;
 }
 
 
-nav{
+nav {
     width: 100vw;
     background-color: rgba(128, 22, 177, 0.9);
     color: white;
@@ -13,7 +17,37 @@ nav{
     padding: 1rem;
 }
 
+
+.container {
+    padding: 2em;
+}
+
+form {
+    margin: auto;
+    width: auto;
+    width: 50em;
+}
+
+input {
+    margin: auto;
+    width: 100%;
+    outline: 0;
+    border-radius: 2vmin;
+    border: 1px ridge gray;
+    color: rgba(60, 17, 218, 0.89);
+    font-size: 4vmin;
+    text-align: center;
+}
+
+input:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: rgba(60, 17, 218, 0.89);
+}
+
+
 ol {
+    background-color: rgba(131, 105, 221, 0.555);
     margin-top: 2rem;
     padding-inline-start: 0%;
     display: grid;
@@ -31,11 +65,13 @@ ol>li {
     background-color: #ECEFF1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-ol>li:hover{
+
+ol>li:hover {
     background-color: #607D8B;
     color: white;
     box-shadow: 4px 3px 2px 2px rgb(114, 111, 111);
 }
+
 .popup {
     top: 0;
     margin: auto;
@@ -47,15 +83,18 @@ ol>li:hover{
     transform: scaleZ(90deg);
 
 }
-ul{
-   display: grid;
-   gap: 10px 10px;
-   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+ul {
+    display: grid;
+    gap: 10px 10px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
-ul>li{
+
+ul>li {
     list-style: none;
     padding: 5px;
 }
+
 p {
     font-size: 4vmin;
     text-align: center;

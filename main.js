@@ -1,13 +1,35 @@
 const listDiv = document.getElementById("list");
-const popupCard=document.getElementById('popupCard');
+const popupCard = document.getElementById("popupCard");
+const form = document.querySelector("form");
+const input = document.querySelector("input");
+
 const countryCache = {};
 const url = "https://restcountries-v1.p.rapidapi.com/all";
+
+//search url ...............
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const inputValue = input.value;
+  const path="name"||"capital"
+  const searchUrl = async () => {
+    const res =await fetch(`https://restcountries-v1.p.rapidapi.com/${path}/${inputValue}`, {
+    headers: {
+      "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
+      "x-rapidapi-key": "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
+    },
+  });
+   const data= await res.json();
+   displayResult(data)
+  }
+  searchUrl();
+  input.value = "";
+});
 
 //fetch url ............
 
 const fetchUrl = async () => {
   const res = await fetch("https://restcountries-v1.p.rapidapi.com/all", {
-    method: "GET",
     headers: {
       "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
       "x-rapidapi-key": "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
@@ -16,7 +38,6 @@ const fetchUrl = async () => {
   const data = await res.json();
   displayResult(data);
 };
-
 
 //display data...............
 
@@ -30,36 +51,37 @@ const displayResult = (data) => {
     </li>`
     )
     .join("");
-  listDiv.innerHTML = html+listDiv.innerHTML;
+  listDiv.innerHTML = html + listDiv.innerHTML;
 };
 
 //display popup..............
 
 const selectCountry = async (data) => {
   if (!countryCache[data]) {
-
     const res = await fetch(
       `https://restcountries-v1.p.rapidapi.com/callingcode/${data}`,
       {
         method: "GET",
         headers: {
           "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
-          "x-rapidapi-key": "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
+          "x-rapidapi-key":
+            "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
         },
       }
-      );
-      const response = await res.json();
-      countryCache[data]=response;
-      displayCountry(response);
-    }
-    displayCountry(countryCache[data])
+    );
+    const response = await res.json();
+    countryCache[data] = response;
+    displayCountry(response);
+  }
+  displayCountry(countryCache[data]);
 };
 
 //display popup................
 
 const displayCountry = (response) => {
-  const html = response.map(
-    (result) => `<div class="popup">
+  const html = response
+    .map(
+      (result) => `<div class="popup">
     <button id="closeBtn" onclick="closePopup()">&times;</button>
     <center><img src="https://www.countryflags.io/${result.alpha2Code}/shiny/64.png">
     <h1>${result.name}</h1>
@@ -86,9 +108,12 @@ const displayCountry = (response) => {
                 <li><p>translocations:-${result.translocations}</p></li>
                 </ul>
         </div>`
-  ).join("");
-  listDiv.innerHTML = html+listDiv.innerHTML;
+    )
+    .join("");
+  listDiv.innerHTML = html + listDiv.innerHTML;
 };
+
+//close popup
 
 const closePopup = () => {
   const popup = document.querySelector(".popup");
