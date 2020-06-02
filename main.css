@@ -126,6 +126,7 @@ p {
 button {
     float: right;
     border: none;
+    outline: none;
     background: none;
     font-size: 3.5em;
     margin:2rem;
