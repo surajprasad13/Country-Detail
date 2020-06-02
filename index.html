@@ -11,12 +11,23 @@
 
     <body>
         <nav>
-
             <h1>Country Detail</h1>
         </nav>
-        <div class="container">
+        <div class="container" id="container">
             <form action="index.html" method="GET">
-                <input type="search" name="search" id="search" placeholder="Search here by capital,region,dialcode or city....">
+                <select name="select" id="select">
+                    <option>Search by...</option>
+                    <option value="name" selected>Country</option>
+                    <option value="alpha">Country Code</option>
+                    <option value="callingcode">Calling Code</option>
+                    <option value="capital">Capital City</option>
+                    <option value="currency">Currency</option>
+                    <option value="lang">Language</option>
+                    <option value="region">Region</option>
+                    <option value="subregion">Sub region</option>
+                </select>
+                <input type="search" name="search" id="search"
+                    placeholder="Search here by capital,region,dialcode or city....">
             </form>
         </div>
         <ol id="list">

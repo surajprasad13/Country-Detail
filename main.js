@@ -2,6 +2,7 @@ const listDiv = document.getElementById("list");
 const popupCard = document.getElementById("popupCard");
 const form = document.querySelector("form");
 const input = document.querySelector("input");
+const select = document.querySelector("select");
 
 const countryCache = {};
 const url = "https://restcountries-v1.p.rapidapi.com/all";
@@ -11,20 +12,45 @@ const url = "https://restcountries-v1.p.rapidapi.com/all";
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   const inputValue = input.value;
-  const path="name"||"capital"
+  const optionValue = select.options[select.selectedIndex].value;
   const searchUrl = async () => {
-    const res =await fetch(`https://restcountries-v1.p.rapidapi.com/${path}/${inputValue}`, {
-    headers: {
-      "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
-      "x-rapidapi-key": "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
-    },
-  });
-   const data= await res.json();
-   displayResult(data)
-  }
+    const res = await fetch(
+      `https://restcountries-v1.p.rapidapi.com/${optionValue}/${inputValue}`,
+      {
+        headers: {
+          "x-rapidapi-host": "restcountries-v1.p.rapidapi.com",
+          "x-rapidapi-key":
+            "137332e08cmsh83a73a314e0a5b2p13aa8djsn84ba447f737f",
+        },
+      }
+    );
+    const data = await res.json();
+    searchResult(data);
+  };
   searchUrl();
   input.value = "";
 });
+
+// search div result element
+
+const searchResult = (data) => {
+  //create div
+  const ol = document.createElement("ol");
+  const container = document.getElementById("container");
+  ol.setAttribute("id", "list");
+  const searchDiv = container.appendChild(ol);
+  const html = data
+    .map(
+      (result) => `<li onclick="selectCountry(${result.callingCodes})">
+  <img src="https://www.countryflags.io/${result.alpha2Code}/shiny/64.png">
+     <h1>${result.name}</h1>
+     <h3>Capital:${result.capital}</h3>
+    </li>`
+    )
+    .join("");
+  searchDiv.innerHTML = html + searchDiv.innerHTML;
+};
+
 
 //fetch url ............
 
@@ -71,7 +97,6 @@ const selectCountry = async (data) => {
     );
     const response = await res.json();
     countryCache[data] = response;
-    displayCountry(response);
   }
   displayCountry(countryCache[data]);
 };
