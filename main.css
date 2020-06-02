@@ -108,7 +108,9 @@ ol>li:hover {
 ul {
     display: grid;
     gap: 10px 10px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    text-align: justify;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 ul>li {
